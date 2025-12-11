@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Radio AUTOCOST</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#020817">
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1f5cff, #020817);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(3, 7, 18, 0.9);
+      border-radius: 24px;
+      padding: 24px 20px 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      backdrop-filter: blur(18px);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .logo span {
+      color: #3b82f6;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #9ca3af;
+      margin-bottom: 16px;
+    }
+
+    .now-playing-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+
+    .now-playing {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .now-playing small {
+      display: block;
+      font-size: 12px;
+      font-weight: 400;
+      color: #9ca3af;
+      margin-top: 3px;
+    }
+
+    .player {
+      background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.35), rgba(15, 23, 42, 0.95));
+      border-radius: 20px;
+      padding: 16px;
+      border: 1px solid rgba(55, 65, 81, 0.7);
+      margin-bottom: 16px;
+    }
+
+    .btn-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .play-btn {
+      flex-shrink: 0;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 0, #60a5fa, #1d4ed8);
+      box-shadow:
+        0 12px 30px rgba(37, 99, 235, 0.6),
+        0 0 0 1px rgba(191, 219, 254, 0.35);
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    .play-btn:active {
+      transform: scale(0.96);
+      box-shadow:
+        0 4px 15px rgba(37, 99, 235, 0.4),
+        0 0 0 1px rgba(191, 219, 254, 0.35);
+    }
+
+    .play-icon {
+      width: 0;
+      height: 0;
+      border-top: 11px solid transparent;
+      border-bottom: 11px solid transparent;
+      border-left: 18px solid #ffffff;
+      margin-left: 3px;
+    }
+
+    .pause-icon {
+      display: flex;
+      gap: 4px;
+    }
+
+    .pause-icon span {
+      width: 4px;
+      height: 18px;
+      border-radius: 999px;
+      background: #ffffff;
+    }
+
+    .track-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .track-title {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .track-meta {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .progress {
+      position: relative;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .progress-fill {
+      position: absolute;
+      inset: 0;
+      transform-origin: left;
+      transform: scaleX(0.1);
+      background: linear-gradient(to right, #93c5fd, #3b82f6, #1d4ed8);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #e5e7eb;
+      margin-top: 8px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .footer {
+      margin-top: 14px;
+      font-size: 11px;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+
+    /* модалка регистрации */
+
+    #driverModal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(6px);
+      z-index: 50;
+    }
+
+    #driverModalContent {
+      background: #0f172a;
+      padding: 20px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 360px;
+      border: 1px solid rgba(148,163,184,0.25);
+      text-align: center;
+    }
+
+    #driverNameInput {
+      width: 100%;
+      padding: 10px;
+      margin-top: 12px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #475569;
+      background: #1e293b;
+      color: #fff;
+    }
+
+    #driverSubmit {
+      margin-top: 16px;
+      width: 100%;
+      padding: 12px 0;
+      background: #2563eb;
+      border: none;
+      font-size: 16px;
+      color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    #driverHint {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 18px 16px 16px;
+      }
+
+      .play-btn {
+        width: 58px;
+        height: 58px;
+      }
+
+      .logo {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- модалка регистрации водителя -->
+  <div id="driverModal">
+    <div id="driverModalContent">
+      <h2>Radio AUTOCOST</h2>
+      <p style="margin-top:6px;color:#cbd5f5;">Чтобы слушать радио, введи позывной или имя</p>
+      <input id="driverNameInput" placeholder="Например: ЛЕШИЙ, Дмитрий, 777" />
+      <button id="driverSubmit">Начать слушать</button>
+      <div id="driverHint">Позывной сохранится на устройстве, чтобы в следующий раз не вводить</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="logo"><span>AUTO</span>COST</div>
+    <div class="subtitle">
+      Радио для таксистов и тех, кто в пути. Музыка для настроения, бренд для головы.
+    </div>
+
+    <div class="now-playing-label">Сейчас в эфире</div>
+    <div class="now-playing" id="currentMode">
+      Day Mode - AUTOCOST Radio
+      <small>Легкий дневной вайб</small>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <button id="dayBtn" style="flex:1;padding:8px 6px;background:#1e40af;color:#fff;border-radius:10px;border:none;font-size:11px;">DAY</button>
+      <button id="nightBtn" style="flex:1;padding:8px 6px;background:#0c4a6e;color:#fff;border-radius:10px;border:none;font-size:11px;">NIGHT</button>
+      <button id="partyBtn" style="flex:1.4;padding:8px 6px;background:#7c2d12;color:#fff;border-radius:10px;border:none;font-size:11px;">FRIDAY & SATURDAY</button>
+    </div>
+
+    <div class="player">
+      <div class="btn-row">
+        <button class="play-btn" id="playButton" aria-label="Play">
+          <div id="playIcon" class="play-icon"></div>
+        </button>
+
+        <div class="track-info">
+          <div class="track-title" id="trackTitle">Day Mix - AUTOCOST Radio</div>
+          <div class="track-meta" id="trackMeta">Deep - lounge - chill</div>
+        </div>
+      </div>
+
+      <div class="progress">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="badge" style="margin-top:10px;">
+        <span class="badge-dot"></span>
+        LIVE STREAM
+      </div>
+    </div>
+
+    <div class="footer">
+      Включи и катись по своим делам.  
+      Ищешь тачку - выбор прост - AUTOCOST.
+    </div>
+  </div>
+
+  <audio id="radioStream"></audio>
+
+  <script>
+    // URL твоего Apps Script
+    const ANALYTICS_URL = "https://script.google.com/macros/s/AKfycbzvBIcBTri6xtG69SoNtUhudjg4ZbP1nsT5OoosFSxPL1i_stsC4d3dxULIaV7lUgZb/exec";
+
+    // сервис воркер для pwa
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("service-worker.js").catch(() => {});
+      });
+    }
+
+    const DRIVER_ID_KEY = "autocost_driver_id_v2";
+    const DRIVER_NAME_KEY = "autocost_driver_name_v2";
+
+    const modal = document.getElementById("driverModal");
+    const driverSubmit = document.getElementById("driverSubmit");
+    const driverNameInput = document.getElementById("driverNameInput");
+
+    function getDriver() {
+      const id = localStorage.getItem(DRIVER_ID_KEY);
+      const name = localStorage.getItem(DRIVER_NAME_KEY);
+      return { id, name };
+    }
+
+    function setDriver(name) {
+      const id = "drv_" + Math.random().toString(36).substring(2, 10);
+      localStorage.setItem(DRIVER_ID_KEY, id);
+      localStorage.setItem(DRIVER_NAME_KEY, name);
+      return { id, name };
+    }
+
+    function hideModal() { modal.style.display = "none"; }
+    function showModal() { modal.style.display = "flex"; }
+
+    // отправка событий в таблицу
+    function sendEvent(eventName, extra) {
+      try {
+        const drv = getDriver();
+        const payload = {
+          driver_id: drv.id || "",
+          driver_name: drv.name || "",
+          event: eventName,
+          mode: window.currentModeKey || "day",
+          user_agent: navigator.userAgent,
+          extra: extra || {}
+        };
+
+        fetch(ANALYTICS_URL, {
+          method: "POST",
+          mode: "no-cors",
+          body: JSON.stringify(payload)
+        }).catch(() => {});
+      } catch (e) {
+        console.log("sendEvent error", e);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const drv = getDriver();
+      if (drv.id && drv.name) {
+        hideModal();
+      } else {
+        showModal();
+      }
+    });
+
+    driverSubmit.addEventListener("click", () => {
+      const name = driverNameInput.value.trim();
+      if (!name) return;
+      setDriver(name);
+      hideModal();
+      sendEvent("register", {});
+    });
+
+    const audio = document.getElementById("radioStream");
+    const playButton = document.getElementById("playButton");
+    const playIcon = document.getElementById("playIcon");
+    const progressFill = document.getElementById("progressFill");
+
+    const dayBtn = document.getElementById("dayBtn");
+    const nightBtn = document.getElementById("nightBtn");
+    const partyBtn = document.getElementById("partyBtn");
+
+    const currentMode = document.getElementById("currentMode");
+    const trackTitle = document.getElementById("trackTitle");
+    const trackMeta = document.getElementById("trackMeta");
+
+    let isPlaying = false;
+    window.currentModeKey = "day";
+
+    function switchMode(mode) {
+      window.currentModeKey = mode;
+
+      if (mode === "day") {
+        audio.src = "autocost_day_mix.mp3";
+        currentMode.innerHTML = "Day Mode - AUTOCOST Radio<small>Легкий дневной вайб</small>";
+        trackTitle.textContent = "Day Mix - AUTOCOST Radio";
+        trackMeta.textContent = "Deep - lounge - chill";
+      } else if (mode === "night") {
+        audio.src = "autocost_night_mix.mp3";
+        currentMode.innerHTML = "Night Mode - AUTOCOST Radio<small>Ночной драйв и house</small>";
+        trackTitle.textContent = "Night Mix - AUTOCOST Radio";
+        trackMeta.textContent = "House - tech - bass";
+      } else if (mode === "party") {
+        audio.src = "autocost_friday_saturday_mix.mp3";
+        currentMode.innerHTML = "Friday & Saturday Night - AUTOCOST Radio<small>Клубный вайб</small>";
+        trackTitle.textContent = "Friday & Saturday Mix - AUTOCOST Radio";
+        trackMeta.textContent = "Club - house - bangers";
+      }
+
+      if (isPlaying) {
+        audio.play();
+      } else {
+        progressFill.style.transform = "scaleX(0.02)";
+      }
+
+      sendEvent("mode_switch", { new_mode: mode });
+    }
+
+    dayBtn.addEventListener("click", () => switchMode("day"));
+    nightBtn.addEventListener("click", () => switchMode("night"));
+    partyBtn.addEventListener("click", () => switchMode("party"));
+
+    playButton.addEventListener("click", async () => {
+      try {
+        if (!isPlaying) {
+          await audio.play();
+          isPlaying = true;
+          setPauseIcon();
+          sendEvent("play_start", { currentTime: audio.currentTime || 0 });
+        } else {
+          audio.pause();
+          isPlaying = false;
+          setPlayIcon();
+          sendEvent("pause", { currentTime: audio.currentTime || 0 });
+        }
+      } catch (e) {}
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      if (audio.duration && !isNaN(audio.duration)) {
+        const p = audio.currentTime / audio.duration;
+        progressFill.style.transform = `scaleX(${Math.max(0.02, Math.min(1, p))})`;
+      }
+    });
+
+    audio.addEventListener("ended", () => {
+      isPlaying = false;
+      setPlayIcon();
+      sendEvent("ended", {});
+    });
+
+    function setPlayIcon() {
+      playIcon.className = "play-icon";
+      playIcon.innerHTML = "";
+    }
+
+    function setPauseIcon() {
+      playIcon.className = "pause-icon";
+      playIcon.innerHTML = "<span></span><span></span>";
+    }
+
+    // тик каждую минуту, пока играет
+    setInterval(() => {
+      if (isPlaying) {
+        sendEvent("tick", { currentTime: audio.currentTime || 0 });
+      }
+    }, 60000);
+
+    // стартовый режим
+    switchMode("day");
+  </script>
+
+</body>
+</html>
