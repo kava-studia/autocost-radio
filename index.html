@@ -325,7 +325,7 @@ document.getElementById("driverSubmit").onclick=()=>{
 };
 document.addEventListener("visibilitychange",()=>sendEvent("visibility_change",{state:document.visibilityState}));
 window.addEventListener("beforeunload",()=>sendEvent("session_end",{active_seconds:Math.round(sessionActiveSeconds)}));
-setInterval(()=>{if(playing)sendEvent("heartbeat",{active_seconds:Math.round(sessionActiveSeconds),audio_state:audioCtx?audioCtx.state:"none"});},60000);
+setInterval(()=>{if(playing){const x={active_seconds:Math.round(sessionActiveSeconds),audio_state:audioCtx?audioCtx.state:"none"};sendEvent("heartbeat",x);sendEvent("tick",x);}},60000);
 setInterval(()=>{updateStats();updateAdTimer();},1000);
 
 if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js").catch(()=>{}));
