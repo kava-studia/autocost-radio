@@ -1,10 +1,10 @@
 {
-  "name": "Radio AUTOCOST",
+  "name": "AUTOCOST Radio 2.0",
   "short_name": "AUTOCOST Radio",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#020817",
-  "theme_color": "#020817",
+  "background_color": "#070b12",
+  "theme_color": "#070b12",
   "icons": [
     {
       "src": "icons/icon-192.png",
