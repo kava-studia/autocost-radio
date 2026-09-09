@@ -1,100 +1,35 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Кабинет водителя - СТУДИЯ РАДИО</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#070b12">
-  <style>
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;background:#070b12;color:#f7f8fb;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    body{padding:18px;background:radial-gradient(circle at 15% 0%,rgba(47,111,255,.22),transparent 34%),#070b12}
-    .app{max-width:520px;margin:0 auto;padding-top:12px}
-    .brand{font-size:24px;font-weight:900;letter-spacing:.08em}.brand span{color:#5b8cff}
-    .eyebrow{font-size:11px;color:#7f8798;letter-spacing:.16em;text-transform:uppercase;margin-top:5px}
-    .card{margin-top:18px;border:1px solid #212a3b;border-radius:28px;padding:22px;background:linear-gradient(180deg,rgba(18,26,42,.96),rgba(10,14,23,.96));box-shadow:0 24px 70px rgba(0,0,0,.28)}
-    h1{font-size:28px;line-height:1.05;margin:0 0 8px;letter-spacing:-.04em}
-    .sub{color:#9aa4b8;line-height:1.5;font-size:13px}
-    .input-row{display:grid;grid-template-columns:1fr auto;gap:9px;margin-top:18px}
-    input{width:100%;padding:14px 15px;border:1px solid #2a3549;border-radius:15px;background:#0a0f18;color:#fff;outline:none;font:inherit}
-    button{border:0;border-radius:15px;padding:0 16px;background:#4f7df0;color:#fff;font:inherit;font-weight:750;cursor:pointer}
-    .status{min-height:22px;margin-top:12px;font-size:12px;color:#8e99ad}.status.ok{color:#63dd92}.status.error{color:#ff91a1}
-    .stats{display:none;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
-    .stat{border:1px solid #222b39;border-radius:18px;padding:14px;background:#0a1019}
-    .stat b{display:block;font-size:21px;line-height:1.1;word-break:break-word}.stat span{display:block;font-size:10px;color:#727d91;margin-top:6px}
-    .wide{grid-column:1/-1}
-    .back{display:inline-block;margin-top:18px;color:#8faeff;text-decoration:none;font-size:13px}
-    .note{margin-top:16px;padding-top:14px;border-top:1px solid #202837;color:#69758b;font-size:11px;line-height:1.55}
-    @media(max-width:420px){.input-row{grid-template-columns:1fr}.input-row button{padding:13px}.stats{grid-template-columns:1fr 1fr}}
-  </style>
+<meta charset="UTF-8"><title>Кабинет водителя · СТУДИЯ РАДИО</title><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#080b11">
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:#080b11;color:#f5f7fb}body{padding:18px;background:radial-gradient(circle at 12% 0,rgba(88,120,255,.18),transparent 31%),#080b11}button,input{font:inherit}.app{max-width:620px;margin:auto;padding-bottom:48px}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.brand{font-size:24px;font-weight:950;letter-spacing:.07em}.brand span{color:#78a0ff}.eyebrow{font-size:10px;color:#6f788b;text-transform:uppercase;letter-spacing:.17em;margin-top:5px}.pill{border:1px solid #252d3c;background:#101620;color:#dce3ef;border-radius:999px;padding:9px 12px;font-size:12px;cursor:pointer}.card{margin-top:18px;border:1px solid #202939;border-radius:28px;padding:22px;background:linear-gradient(180deg,#111826,#0b1019)}h1{font-size:31px;line-height:1.04;letter-spacing:-.04em;margin:0 0 8px}.sub{font-size:13px;color:#98a4b8;line-height:1.55}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:18px}.stat{border:1px solid #232c3a;border-radius:18px;padding:14px;background:#0a1019}.stat b{display:block;font-size:23px}.stat span{display:block;font-size:10px;color:#727f92;margin-top:5px}.wide{grid-column:1/-1}.section-title{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#657188;margin:24px 2px 10px}.rewards,.events,.requests{display:grid;gap:8px}.item{border:1px solid #222b38;border-radius:17px;padding:13px 14px;background:#0d131d}.item-row{display:flex;justify-content:space-between;gap:12px;align-items:center}.item b{font-size:13px}.item p{font-size:11px;color:#788498;margin:4px 0 0;line-height:1.4}.item button{border:1px solid #2c3b59;background:#17233a;color:#dfe7f7;border-radius:12px;padding:9px 11px;font-size:11px}.item button:disabled{opacity:.42;cursor:not-allowed}.status{font-size:11px;color:#7d899d;margin-top:12px;min-height:18px}.register{display:none}.register.show{display:block}.register input{width:100%;margin-top:14px;padding:14px;border:1px solid #2b374a;border-radius:14px;background:#080e17;color:#fff}.primary{width:100%;margin-top:9px;padding:14px;border:0;border-radius:14px;background:#4e7df0;color:#fff;font-weight:800}.link{color:#8eacff;text-decoration:none}.tiny{font-size:10px;color:#616d80;line-height:1.5;margin-top:12px}@media(max-width:450px){.brand{font-size:21px}h1{font-size:28px}}
+</style>
 </head>
 <body>
-  <main class="app">
-    <div class="brand"><span>СТУДИЯ</span> РАДИО</div>
-    <div class="eyebrow">driver cabinet - demo 2.0</div>
-
-    <section class="card">
-      <h1>Твой эфир.<br>Твои минуты.</h1>
-      <div class="sub">Введи тот же позывной, который используешь в радио. Если ты уже заходил с этого устройства, попробуем подставить его автоматически.</div>
-
-      <div class="input-row">
-        <input id="nameInput" maxlength="40" placeholder="Например: 777, ЛЕШИЙ, ЮРА">
-        <button id="checkButton">Показать</button>
-      </div>
-      <div id="status" class="status"></div>
-
-      <div id="statsBlock" class="stats">
-        <div class="stat wide"><b id="statName">-</b><span>водитель</span></div>
-        <div class="stat"><b id="statMinutes">0</b><span>валидных минут</span></div>
-        <div class="stat"><b id="statHours">0</b><span>часов</span></div>
-        <div class="stat"><b id="statDays">0</b><span>дней в эфире</span></div>
-        <div class="stat"><b id="statPayout">0 ₽</b><span>начислено</span></div>
-        <div class="stat wide"><b id="statLastDate">-</b><span>последняя активность</span></div>
-      </div>
-
-      <a class="back" href="index.html">← Вернуться в эфир</a>
-      <div class="note">Сейчас кабинет читает старый аналитический контур Google Apps Script. Новая версия радио продолжает отправлять прежние минутные tick-события вместе с heartbeat, чтобы существующий расчёт не отвалился во время перехода.</div>
-    </section>
-  </main>
+<main class="app">
+  <div class="top"><div><div class="brand"><span>СТУДИЯ</span> РАДИО</div><div class="eyebrow">driver cabinet</div></div><div><button class="pill" onclick="location.href='index.html'">В эфир</button> <button class="pill" id="logoutBtn" style="display:none">Выйти</button></div></div>
+  <section class="card" id="cabinet"><h1>Твои минуты.<br>Твой баланс.</h1><div class="sub">Здесь учитываются только валидные минуты водительского режима. Пауза, mute и рекламная вставка в начисление не входят.</div><div class="stats" id="stats" style="display:none"><div class="stat wide"><b id="name">—</b><span>позывной</span></div><div class="stat"><b id="minutes">0</b><span>валидных минут</span></div><div class="stat"><b id="hours">0</b><span>часов</span></div><div class="stat"><b id="balance">0 ₽</b><span>баланс</span></div><div class="stat"><b id="points">0</b><span>условных баллов</span></div><div class="stat wide"><b id="lastSeen">—</b><span>последняя активность</span></div></div><div class="status" id="status"></div>
+    <div class="register" id="register"><div class="sub" style="margin-top:14px">На этом устройстве ещё нет кабинета. Введи позывной — создадим его без телефона, паспорта и анкеты.</div><input id="callsignInput" maxlength="40" placeholder="Например: 777, ЛЕШИЙ, ЮРА"><button class="primary" id="createBtn">Создать кабинет</button></div>
+  </section>
+  <div id="privateContent" style="display:none">
+    <div class="section-title">Награды и обмен</div><section class="rewards" id="rewards"></section>
+    <div class="section-title">Мои заявки</div><section class="requests" id="requests"></section>
+    <div class="section-title">Последняя активность</div><section class="events" id="events"></section>
+    <div class="tiny">Баллы сейчас считаются как демонстрационный коэффициент поверх рублёвого баланса. В админке можно менять ставку и каталог партнёрских наград.</div>
+  </div>
+</main>
 <script>
-const API_URL="https://script.google.com/macros/s/AKfycbzvBIcBTri6xtG69SoNtUhudjg4ZbP1nsT5OoosFSxPL1i_stsC4d3dxULIaV7lUgZb/exec";
-const NAME_KEY="autocost_driver_name_v3";
-const nameInput=document.getElementById("nameInput");
-const checkButton=document.getElementById("checkButton");
-const statusEl=document.getElementById("status");
-const statsBlock=document.getElementById("statsBlock");
-const statName=document.getElementById("statName");
-const statMinutes=document.getElementById("statMinutes");
-const statHours=document.getElementById("statHours");
-const statDays=document.getElementById("statDays");
-const statPayout=document.getElementById("statPayout");
-const statLastDate=document.getElementById("statLastDate");
-function fmt(n){const x=Number(n||0);return (Math.round(x*100)/100).toString().replace(".",",")}
-async function loadStats(){
-  const q=nameInput.value.trim();
-  if(!q){statusEl.textContent="Сначала введи позывной.";statusEl.className="status error";statsBlock.style.display="none";return}
-  statusEl.textContent="Ищу прослушивания...";statusEl.className="status";statsBlock.style.display="none";
-  try{
-    const res=await fetch(API_URL+"?name="+encodeURIComponent(q));
-    const data=await res.json();
-    if(!data.found){statusEl.textContent="По этому позывному пока нет валидных минут.";statusEl.className="status error";return}
-    statName.textContent=data.driver_name||data.driver_id||q;
-    statMinutes.textContent=fmt(data.total_valid_minutes||0);
-    statHours.textContent=fmt(data.total_hours||0);
-    statDays.textContent=data.days_active||0;
-    statPayout.textContent=fmt(data.total_payout||0)+" ₽";
-    statLastDate.textContent=data.last_date||"нет данных";
-    statsBlock.style.display="grid";
-    statusEl.textContent="Данные найдены.";statusEl.className="status ok";
-  }catch(e){
-    statusEl.textContent="Старый аналитический контур сейчас не ответил. Радио при этом может продолжать работать.";
-    statusEl.className="status error";
-  }
-}
-checkButton.onclick=loadStats;
-nameInput.addEventListener("keydown",e=>{if(e.key==="Enter")loadStats()});
-const saved=localStorage.getItem(NAME_KEY);
-if(saved){nameInput.value=saved;loadStats()}
+const SUPA='https://ieqnyjccyxzjwsexkgjv.supabase.co';const ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImllcW55amNjeXh6andzZXhrZ2p2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYxMjMyOTAsImV4cCI6MjEwMTY5OTI5MH0.bPgS38kaGTYC3NHCS_ST0sCkQZuOLkn0Jw0Hmyd61kE';const D_TOKEN='studia_radio_driver_token',D_ID='studia_radio_driver_id',D_NAME='studia_radio_driver_name';let me=null,economy={points_per_ruble:10};
+function driver(){return{id:localStorage.getItem(D_ID),token:localStorage.getItem(D_TOKEN),name:localStorage.getItem(D_NAME)}}function headers(extra={}){return{'apikey':ANON,'Authorization':'Bearer '+ANON,'Content-Type':'application/json',...extra}}async function api(path,opt={}){const r=await fetch(SUPA+'/rest/v1/'+path,{method:opt.method||'GET',headers:headers(opt.headers||{}),body:opt.body?JSON.stringify(opt.body):undefined});if(!r.ok)throw new Error(await r.text());const t=await r.text();return t?JSON.parse(t):null}async function sha256(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function createDriver(){const name=document.getElementById('callsignInput').value.trim();if(!name)return;const token='sr_'+crypto.randomUUID()+'_'+crypto.randomUUID(),hash=await sha256(token);document.getElementById('status').textContent='Создаю кабинет...';try{const rows=await api('radio_drivers?select=*',{method:'POST',headers:{'x-driver-token':token,'Prefer':'return=representation'},body:{callsign:name,token_hash:hash}});const d=rows&&rows[0];if(!d)throw new Error();localStorage.setItem(D_TOKEN,token);localStorage.setItem(D_ID,d.id);localStorage.setItem(D_NAME,d.callsign);await loadCabinet()}catch(e){document.getElementById('status').textContent='Не удалось создать кабинет. Попробуй ещё раз.'}}
+function fmtDate(v){if(!v)return'—';try{return new Intl.DateTimeFormat('ru-RU',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(new Date(v))}catch(e){return v}}
+async function loadCabinet(){const d=driver();if(!d.id||!d.token){document.getElementById('register').classList.add('show');document.getElementById('status').textContent='Создай кабинет или зайди в водительский режим из эфира.';return}document.getElementById('register').classList.remove('show');document.getElementById('status').textContent='Загружаю...';try{const [rows,settings]=await Promise.all([api('radio_drivers?select=*&id=eq.'+encodeURIComponent(d.id),{headers:{'x-driver-token':d.token}}),api('radio_settings?select=*&key=eq.economy')]);if(!rows||!rows[0])throw new Error('no driver');me=rows[0];if(settings&&settings[0]&&settings[0].value)economy=settings[0].value;const mins=Number(me.total_valid_seconds||0)/60,hours=mins/60,bal=Number(me.balance_rub||0),pts=Math.floor(bal*Number(economy.points_per_ruble||10));document.getElementById('name').textContent=me.callsign;document.getElementById('minutes').textContent=mins.toFixed(1);document.getElementById('hours').textContent=hours.toFixed(2);document.getElementById('balance').textContent=bal.toFixed(2)+' ₽';document.getElementById('points').textContent=pts;document.getElementById('lastSeen').textContent=fmtDate(me.last_seen);document.getElementById('stats').style.display='grid';document.getElementById('privateContent').style.display='block';document.getElementById('logoutBtn').style.display='inline-block';document.getElementById('status').textContent='Данные обновлены.';await Promise.all([loadRewards(pts),loadEvents(),loadRequests()])}catch(e){document.getElementById('status').textContent='Кабинет не ответил. Можно сбросить устройство и зарегистрироваться заново.'}}
+async function loadRewards(points){const d=driver();try{const rows=await api('radio_rewards?select=*&active=eq.true&order=cost_points.asc');document.getElementById('rewards').innerHTML=(rows||[]).map(r=>'<div class="item"><div class="item-row"><div><b>'+r.title+'</b><p>'+r.description+' · '+r.cost_points+' баллов</p></div><button '+(points<r.cost_points?'disabled':'')+' onclick="redeem('+r.id+','+r.cost_points+')">Обменять</button></div></div>').join('')||'<div class="item"><p>Каталог пока пуст.</p></div>'}catch(e){}}
+async function redeem(rewardId,cost){if(!me)return;if(!confirm('Создать заявку на обмен за '+cost+' баллов?'))return;const d=driver();try{await api('radio_redemptions',{method:'POST',headers:{'x-driver-token':d.token,'Prefer':'return=minimal'},body:{driver_id:d.id,reward_id:rewardId}});await loadRequests();alert('Заявка создана. Она появилась у администратора.')}catch(e){alert('Не удалось создать заявку.')}}
+async function loadEvents(){const d=driver();try{const rows=await api('radio_events?select=event,channel_id,muted,created_at&driver_id=eq.'+encodeURIComponent(d.id)+'&order=created_at.desc&limit=12',{headers:{'x-driver-token':d.token}});document.getElementById('events').innerHTML=(rows||[]).map(e=>'<div class="item"><div class="item-row"><b>'+e.event+'</b><span style="font-size:10px;color:#758095">'+fmtDate(e.created_at)+'</span></div><p>'+(e.channel_id||'система')+(e.muted?' · звук выключен':'')+'</p></div>').join('')||'<div class="item"><p>Активности пока нет.</p></div>'}catch(e){}}
+async function loadRequests(){const d=driver();try{const rows=await api('radio_redemptions?select=id,status,created_at,reward_id,radio_rewards(title,cost_points)&driver_id=eq.'+encodeURIComponent(d.id)+'&order=created_at.desc',{headers:{'x-driver-token':d.token}});document.getElementById('requests').innerHTML=(rows||[]).map(x=>'<div class="item"><div class="item-row"><b>'+((x.radio_rewards&&x.radio_rewards.title)||'Награда')+'</b><span style="font-size:10px;color:#8faeff">'+x.status+'</span></div><p>'+fmtDate(x.created_at)+'</p></div>').join('')||'<div class="item"><p>Заявок пока нет.</p></div>'}catch(e){}}
+function logout(){if(!confirm('Сбросить кабинет на этом устройстве?'))return;localStorage.removeItem(D_TOKEN);localStorage.removeItem(D_ID);localStorage.removeItem(D_NAME);location.reload()}
+document.getElementById('createBtn').onclick=createDriver;document.getElementById('logoutBtn').onclick=logout;loadCabinet();
 </script>
-</body>
-</html>
+</body></html>
