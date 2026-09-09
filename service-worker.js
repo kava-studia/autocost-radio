@@ -1,12 +1,12 @@
 // Простой сервис воркер без кэша - пока просто формальность для PWA
 
 self.addEventListener("install", event => {
-  console.log("AUTOCOST Radio service worker installed");
+  console.log("СТУДИЯ РАДИО service worker installed");
   self.skipWaiting();
 });
 
 self.addEventListener("activate", event => {
-  console.log("AUTOCOST Radio service worker activated");
+  console.log("СТУДИЯ РАДИО service worker activated");
 });
 
 self.addEventListener("fetch", event => {
