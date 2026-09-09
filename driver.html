@@ -2,274 +2,99 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Мой кабинет - AUTOCOST Radio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#020817">
-
+  <title>Кабинет водителя - AUTOCOST Radio 2.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#070b12">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    body {
-      min-height: 100vh;
-      background: radial-gradient(circle at top, #1f5cff, #020817);
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .card {
-      width: 100%;
-      max-width: 420px;
-      background: rgba(3, 7, 18, 0.9);
-      border-radius: 24px;
-      padding: 24px 20px 20px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      backdrop-filter: blur(18px);
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
-    .logo span {
-      color: #3b82f6;
-    }
-
-    .subtitle {
-      font-size: 13px;
-      color: #9ca3af;
-      margin-bottom: 18px;
-    }
-
-    .field-label {
-      font-size: 12px;
-      color: #9ca3af;
-      margin-bottom: 4px;
-    }
-
-    .input-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    #nameInput {
-      flex: 1;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #475569;
-      background: #0f172a;
-      color: #e5e7eb;
-      font-size: 14px;
-    }
-
-    #checkButton {
-      padding: 10px 14px;
-      border-radius: 10px;
-      border: none;
-      background: #2563eb;
-      color: #fff;
-      font-size: 13px;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    #checkButton:active {
-      transform: scale(0.97);
-    }
-
-    .hint {
-      font-size: 11px;
-      color: #6b7280;
-      margin-bottom: 12px;
-    }
-
-    .stats {
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(55,65,81,0.8);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .stat-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 4px;
-    }
-
-    .stat-label {
-      color: #9ca3af;
-    }
-
-    .stat-value {
-      font-weight: 500;
-    }
-
-    .status {
-      margin-top: 8px;
-      font-size: 12px;
-    }
-
-    .status.ok {
-      color: #4ade80;
-    }
-
-    .status.error {
-      color: #f97373;
-    }
-
-    .back-link {
-      margin-top: 14px;
-      font-size: 11px;
-      color: #9ca3af;
-    }
-
-    .back-link a {
-      color: #60a5fa;
-      text-decoration: none;
-    }
-
-    .back-link a:hover {
-      text-decoration: underline;
-    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:#070b12;color:#f7f8fb;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    body{padding:18px;background:radial-gradient(circle at 15% 0%,rgba(47,111,255,.22),transparent 34%),#070b12}
+    .app{max-width:520px;margin:0 auto;padding-top:12px}
+    .brand{font-size:24px;font-weight:900;letter-spacing:.08em}.brand span{color:#5b8cff}
+    .eyebrow{font-size:11px;color:#7f8798;letter-spacing:.16em;text-transform:uppercase;margin-top:5px}
+    .card{margin-top:18px;border:1px solid #212a3b;border-radius:28px;padding:22px;background:linear-gradient(180deg,rgba(18,26,42,.96),rgba(10,14,23,.96));box-shadow:0 24px 70px rgba(0,0,0,.28)}
+    h1{font-size:28px;line-height:1.05;margin:0 0 8px;letter-spacing:-.04em}
+    .sub{color:#9aa4b8;line-height:1.5;font-size:13px}
+    .input-row{display:grid;grid-template-columns:1fr auto;gap:9px;margin-top:18px}
+    input{width:100%;padding:14px 15px;border:1px solid #2a3549;border-radius:15px;background:#0a0f18;color:#fff;outline:none;font:inherit}
+    button{border:0;border-radius:15px;padding:0 16px;background:#4f7df0;color:#fff;font:inherit;font-weight:750;cursor:pointer}
+    .status{min-height:22px;margin-top:12px;font-size:12px;color:#8e99ad}.status.ok{color:#63dd92}.status.error{color:#ff91a1}
+    .stats{display:none;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
+    .stat{border:1px solid #222b39;border-radius:18px;padding:14px;background:#0a1019}
+    .stat b{display:block;font-size:21px;line-height:1.1;word-break:break-word}.stat span{display:block;font-size:10px;color:#727d91;margin-top:6px}
+    .wide{grid-column:1/-1}
+    .back{display:inline-block;margin-top:18px;color:#8faeff;text-decoration:none;font-size:13px}
+    .note{margin-top:16px;padding-top:14px;border-top:1px solid #202837;color:#69758b;font-size:11px;line-height:1.55}
+    @media(max-width:420px){.input-row{grid-template-columns:1fr}.input-row button{padding:13px}.stats{grid-template-columns:1fr 1fr}}
   </style>
 </head>
 <body>
+  <main class="app">
+    <div class="brand"><span>AUTO</span>COST RADIO</div>
+    <div class="eyebrow">driver cabinet - demo 2.0</div>
 
-  <div class="card">
-    <div class="logo"><span>AUTO</span>COST</div>
-    <div class="subtitle">
-      Мой кабинет таксиста. Введи свой позывной так же, как в радио, и посмотри сколько минут и денег уже наслушал.
-    </div>
+    <section class="card">
+      <h1>Твой эфир.<br>Твои минуты.</h1>
+      <div class="sub">Введи тот же позывной, который используешь в радио. Если ты уже заходил с этого устройства, попробуем подставить его автоматически.</div>
 
-    <div class="field-label">Позывной или имя</div>
-    <div class="input-row">
-      <input id="nameInput" placeholder="Например: Три топора, ЛЕШИЙ, Дмитрий">
-      <button id="checkButton">Показать</button>
-    </div>
-
-    <div class="hint">
-      Вводи позывной точно так же, как писал при входе в Radio AUTOCOST.
-    </div>
-
-    <div id="status" class="status"></div>
-
-    <div id="statsBlock" class="stats" style="display:none;">
-      <div class="stat-row">
-        <div class="stat-label">Водитель</div>
-        <div class="stat-value" id="statName"></div>
+      <div class="input-row">
+        <input id="nameInput" maxlength="40" placeholder="Например: 777, ЛЕШИЙ, ЮРА">
+        <button id="checkButton">Показать</button>
       </div>
-      <div class="stat-row">
-        <div class="stat-label">Всего минут (с учетом лимита)</div>
-        <div class="stat-value" id="statMinutes"></div>
+      <div id="status" class="status"></div>
+
+      <div id="statsBlock" class="stats">
+        <div class="stat wide"><b id="statName">-</b><span>водитель</span></div>
+        <div class="stat"><b id="statMinutes">0</b><span>валидных минут</span></div>
+        <div class="stat"><b id="statHours">0</b><span>часов</span></div>
+        <div class="stat"><b id="statDays">0</b><span>дней в эфире</span></div>
+        <div class="stat"><b id="statPayout">0 ₽</b><span>начислено</span></div>
+        <div class="stat wide"><b id="statLastDate">-</b><span>последняя активность</span></div>
       </div>
-      <div class="stat-row">
-        <div class="stat-label">Всего часов</div>
-        <div class="stat-value" id="statHours"></div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-label">Дней был в эфире</div>
-        <div class="stat-value" id="statDays"></div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-label">Начислено</div>
-        <div class="stat-value" id="statPayout"></div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-label">Последний день в эфире</div>
-        <div class="stat-value" id="statLastDate"></div>
-      </div>
-    </div>
 
-    <div class="back-link">
-      <a href="index.html">Вернуться к Radio AUTOCOST</a>
-    </div>
-  </div>
-
-  <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbzvBIcBTri6xtG69SoNtUhudjg4ZbP1nsT5OoosFSxPL1i_stsC4d3dxULIaV7lUgZb/exec";
-
-    const nameInput = document.getElementById("nameInput");
-    const checkButton = document.getElementById("checkButton");
-    const statusEl = document.getElementById("status");
-    const statsBlock = document.getElementById("statsBlock");
-
-    const statName = document.getElementById("statName");
-    const statMinutes = document.getElementById("statMinutes");
-    const statHours = document.getElementById("statHours");
-    const statDays = document.getElementById("statDays");
-    const statPayout = document.getElementById("statPayout");
-    const statLastDate = document.getElementById("statLastDate");
-
-    function formatNumber(n) {
-      return (Math.round(n * 100) / 100).toString().replace(".", ",");
-    }
-
-    async function loadStats() {
-      const q = nameInput.value.trim();
-      if (!q) {
-        statusEl.textContent = "Сначала введи позывной или имя.";
-        statusEl.className = "status error";
-        statsBlock.style.display = "none";
-        return;
-      }
-
-      statusEl.textContent = "Загружаю данные...";
-      statusEl.className = "status";
-      statsBlock.style.display = "none";
-
-      try {
-        const url = API_URL + "?name=" + encodeURIComponent(q);
-        const res = await fetch(url);
-        const data = await res.json();
-
-        if (!data.found) {
-          statusEl.textContent = "По такому позывному пока нет прослушиваний.";
-          statusEl.className = "status error";
-          statsBlock.style.display = "none";
-          return;
-        }
-
-        statusEl.textContent = "Нашел данные по твоему позывному.";
-        statusEl.className = "status ok";
-
-        statName.textContent = data.driver_name || data.driver_id || q;
-        statMinutes.textContent = data.total_valid_minutes + " мин";
-        statHours.textContent = formatNumber(data.total_hours) + " ч";
-        statDays.textContent = data.days_active || 0;
-        statPayout.textContent = formatNumber(data.total_payout) + " ₽";
-        statLastDate.textContent = data.last_date || "нет данных";
-
-        statsBlock.style.display = "block";
-
-      } catch (err) {
-        console.error(err);
-        statusEl.textContent = "Ошибка при загрузке. Попробуй еще раз позже.";
-        statusEl.className = "status error";
-        statsBlock.style.display = "none";
-      }
-    }
-
-    checkButton.addEventListener("click", loadStats);
-    nameInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        loadStats();
-      }
-    });
-  </script>
-
+      <a class="back" href="index.html">← Вернуться в эфир</a>
+      <div class="note">Сейчас кабинет читает старый аналитический контур Google Apps Script. Новая версия радио продолжает отправлять прежние минутные tick-события вместе с heartbeat, чтобы существующий расчёт не отвалился во время перехода.</div>
+    </section>
+  </main>
+<script>
+const API_URL="https://script.google.com/macros/s/AKfycbzvBIcBTri6xtG69SoNtUhudjg4ZbP1nsT5OoosFSxPL1i_stsC4d3dxULIaV7lUgZb/exec";
+const NAME_KEY="autocost_driver_name_v3";
+const nameInput=document.getElementById("nameInput");
+const checkButton=document.getElementById("checkButton");
+const statusEl=document.getElementById("status");
+const statsBlock=document.getElementById("statsBlock");
+const statName=document.getElementById("statName");
+const statMinutes=document.getElementById("statMinutes");
+const statHours=document.getElementById("statHours");
+const statDays=document.getElementById("statDays");
+const statPayout=document.getElementById("statPayout");
+const statLastDate=document.getElementById("statLastDate");
+function fmt(n){const x=Number(n||0);return (Math.round(x*100)/100).toString().replace(".",",")}
+async function loadStats(){
+  const q=nameInput.value.trim();
+  if(!q){statusEl.textContent="Сначала введи позывной.";statusEl.className="status error";statsBlock.style.display="none";return}
+  statusEl.textContent="Ищу прослушивания...";statusEl.className="status";statsBlock.style.display="none";
+  try{
+    const res=await fetch(API_URL+"?name="+encodeURIComponent(q));
+    const data=await res.json();
+    if(!data.found){statusEl.textContent="По этому позывному пока нет валидных минут.";statusEl.className="status error";return}
+    statName.textContent=data.driver_name||data.driver_id||q;
+    statMinutes.textContent=fmt(data.total_valid_minutes||0);
+    statHours.textContent=fmt(data.total_hours||0);
+    statDays.textContent=data.days_active||0;
+    statPayout.textContent=fmt(data.total_payout||0)+" ₽";
+    statLastDate.textContent=data.last_date||"нет данных";
+    statsBlock.style.display="grid";
+    statusEl.textContent="Данные найдены.";statusEl.className="status ok";
+  }catch(e){
+    statusEl.textContent="Старый аналитический контур сейчас не ответил. Радио при этом может продолжать работать.";
+    statusEl.className="status error";
+  }
+}
+checkButton.onclick=loadStats;
+nameInput.addEventListener("keydown",e=>{if(e.key==="Enter")loadStats()});
+const saved=localStorage.getItem(NAME_KEY);
+if(saved){nameInput.value=saved;loadStats()}
+</script>
 </body>
 </html>
