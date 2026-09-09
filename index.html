@@ -1,342 +1,71 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>СТУДИЯ РАДИО</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#070b12">
-  <link rel="manifest" href="manifest.webmanifest">
-  <style>
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;background:#070b12;color:#f7f8fb;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    body{padding:18px;background:
-      radial-gradient(circle at 15% 0%,rgba(47,111,255,.22),transparent 34%),
-      radial-gradient(circle at 100% 10%,rgba(166,87,255,.16),transparent 30%),
-      #070b12}
-    button,input{font:inherit}
-    button{cursor:pointer}
-    .app{max-width:520px;margin:0 auto;padding-bottom:40px}
-    .top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin:8px 0 18px}
-    .brand{font-size:24px;font-weight:900;letter-spacing:.08em}.brand span{color:#5b8cff}
-    .eyebrow{font-size:11px;color:#7f8798;letter-spacing:.16em;text-transform:uppercase;margin-top:5px}
-    .mini{border:1px solid #232a37;background:#101621;color:#dbe1ee;border-radius:999px;padding:9px 12px;font-size:12px}
-    .hero{border:1px solid #212a3b;border-radius:28px;padding:22px;background:linear-gradient(180deg,rgba(18,26,42,.96),rgba(10,14,23,.96));box-shadow:0 24px 70px rgba(0,0,0,.28)}
-    .live{display:flex;align-items:center;gap:8px;color:#aab3c5;font-size:12px}.dot{width:8px;height:8px;border-radius:50%;background:#37d67a;box-shadow:0 0 14px #37d67a}
-    h1{font-size:30px;line-height:1.02;margin:14px 0 8px;letter-spacing:-.04em}
-    .sub{color:#9aa4b8;line-height:1.5;font-size:14px}
-    .station-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:18px}
-    .station{min-height:78px;border:1px solid #263044;background:#111827;color:#dfe5ef;border-radius:18px;padding:13px;text-align:left;transition:.15s}
-    .station.active{border-color:#6f96ff;background:linear-gradient(135deg,#172545,#121929);box-shadow:0 0 0 1px rgba(111,150,255,.2)}
-    .station strong{display:block;font-size:14px;margin-bottom:5px}.station small{color:#7f899c;font-size:11px;line-height:1.3}
-    .player{margin-top:16px;border:1px solid #252e3d;border-radius:24px;padding:16px;background:#0d131e}
-    .row{display:flex;align-items:center;gap:14px}
-    .play{width:68px;height:68px;flex:0 0 68px;border:none;border-radius:50%;background:linear-gradient(145deg,#79a2ff,#3768e8);color:#fff;font-size:24px;font-weight:700;box-shadow:0 14px 36px rgba(55,104,232,.28)}
-    .meta{min-width:0}.meta .name{font-weight:750;font-size:16px}.meta .desc{font-size:12px;color:#8d97aa;margin-top:4px}.meta .timer{font-size:11px;color:#657087;margin-top:7px}
-    .controls{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.control{border:1px solid #253047;background:#131b29;color:#dfe5ef;border-radius:14px;padding:11px}
-    .control.on{border-color:#ff7e91;color:#ffd8de;background:#26151c}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.stat{border:1px solid #222b39;border-radius:16px;padding:12px;background:#0a1019}.stat b{display:block;font-size:18px}.stat span{display:block;font-size:10px;color:#727d91;margin-top:4px}
-    .section-title{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#68758b;margin:24px 2px 10px}
-    .hub{display:grid;gap:8px}.hub-item{display:flex;justify-content:space-between;gap:12px;border:1px solid #222b38;border-radius:17px;padding:13px 14px;background:#0d131d}.hub-item b{font-size:13px}.hub-item span{font-size:11px;color:#758095;text-align:right}
-    .notice{margin-top:16px;font-size:11px;line-height:1.55;color:#657087}
-    .driver-panel{position:fixed;inset:0;background:rgba(3,6,12,.82);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:18px;z-index:20}
-    .driver-card{width:100%;max-width:390px;border:1px solid #27334a;border-radius:26px;padding:22px;background:#0d1420}
-    .driver-card h2{margin:0 0 8px}.driver-card p{margin:0;color:#8893a7;font-size:13px;line-height:1.5}
-    .driver-card input{width:100%;margin-top:16px;padding:14px 15px;border:1px solid #2a3549;border-radius:15px;background:#0a0f18;color:#fff;outline:none}
-    .driver-card button{width:100%;margin-top:10px;padding:14px;border:0;border-radius:15px;background:#4f7df0;color:#fff;font-weight:750}
-    .ad{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(140%);width:min(92vw,480px);border:1px solid #3b4250;border-radius:22px;padding:16px;background:rgba(16,20,29,.98);box-shadow:0 20px 70px rgba(0,0,0,.5);transition:.25s;z-index:30}
-    .ad.show{transform:translateX(-50%) translateY(0)}.ad small{color:#778198}.ad b{display:block;margin:6px 0;font-size:16px}.ad p{margin:0;color:#aab3c2;font-size:12px;line-height:1.45}
-    @media (max-width:420px){.station-grid{grid-template-columns:1fr 1fr}h1{font-size:27px}.stats{grid-template-columns:1fr 1fr 1fr}}
-  </style>
+<meta charset="UTF-8">
+<title>СТУДИЯ РАДИО</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080b11">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:#080b11;color:#f5f7fb}body{padding:18px;background:radial-gradient(circle at 12% 0,rgba(88,120,255,.18),transparent 31%),radial-gradient(circle at 95% 6%,rgba(184,92,255,.12),transparent 27%),#080b11}button,input{font:inherit}button{cursor:pointer}.app{max-width:620px;margin:auto;padding-bottom:48px}.top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin:7px 0 18px}.brand{font-size:25px;font-weight:950;letter-spacing:.07em}.brand span{color:#78a0ff}.eyebrow{font-size:10px;color:#6f788b;text-transform:uppercase;letter-spacing:.17em;margin-top:5px}.nav{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.pill{border:1px solid #252d3c;background:#101620;color:#dce3ef;border-radius:999px;padding:9px 12px;font-size:12px}.hero{border:1px solid #202939;border-radius:29px;padding:22px;background:linear-gradient(180deg,#111826,#0b1019);box-shadow:0 28px 80px rgba(0,0,0,.28)}.live{display:flex;align-items:center;gap:8px;font-size:12px;color:#a5afc1}.dot{width:8px;height:8px;border-radius:50%;background:#38d77e;box-shadow:0 0 14px #38d77e}h1{font-size:35px;line-height:1.02;letter-spacing:-.045em;margin:15px 0 10px}.sub{font-size:14px;line-height:1.55;color:#98a4b8}.mode{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:15px 0 0;padding:12px 13px;border:1px solid #222b3a;border-radius:16px;background:#0a1019}.mode b{font-size:12px}.mode span{font-size:11px;color:#778296;text-align:right}.stations{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:17px}.station{min-height:80px;border:1px solid #253047;background:#111827;color:#e0e5ee;border-radius:18px;padding:13px;text-align:left}.station.active{border-color:#7198ff;background:linear-gradient(135deg,#172746,#111a2a);box-shadow:0 0 0 1px rgba(113,152,255,.16)}.station strong{display:block;font-size:14px}.station small{display:block;margin-top:5px;color:#7b879b;font-size:11px;line-height:1.35}.player{margin-top:15px;border:1px solid #252e3d;border-radius:24px;padding:16px;background:#0c121c}.row{display:flex;align-items:center;gap:14px}.play{width:70px;height:70px;flex:0 0 70px;border:0;border-radius:50%;font-size:24px;color:#fff;background:linear-gradient(145deg,#7fa7ff,#3d6de7);box-shadow:0 14px 36px rgba(61,109,231,.25)}.meta{min-width:0}.name{font-weight:800;font-size:17px}.desc{font-size:12px;color:#8c97ab;margin-top:4px}.timer{font-size:11px;color:#647087;margin-top:7px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.control{border:1px solid #283248;background:#131b29;color:#dfe5ef;border-radius:14px;padding:11px}.control.on{border-color:#ff8596;color:#ffdbe0;background:#26151d}.driver-stats{display:none;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:11px}.stat{border:1px solid #222b39;border-radius:15px;padding:11px;background:#090f18}.stat b{display:block;font-size:17px}.stat span{display:block;font-size:9px;color:#727e92;margin-top:4px}.section-title{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#657188;margin:24px 2px 10px}.hub{display:grid;gap:8px}.hub-item{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid #222b38;border-radius:17px;padding:13px 14px;background:#0d131d}.hub-item b{font-size:13px}.hub-item span{font-size:10px;color:#758095;text-align:right}.notice{margin-top:16px;color:#606b7e;font-size:10px;line-height:1.55}.overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(2,5,10,.84);backdrop-filter:blur(14px);z-index:40}.overlay.show{display:flex}.card{width:100%;max-width:390px;border:1px solid #29354a;border-radius:25px;padding:22px;background:#0d1420}.card h2{margin:10px 0 7px}.card p{margin:0;color:#8793a8;font-size:12px;line-height:1.5}.card input{width:100%;margin-top:14px;padding:14px;border:1px solid #2b374a;border-radius:14px;background:#080e17;color:#fff}.primary{width:100%;margin-top:9px;padding:14px;border:0;border-radius:14px;background:#4e7df0;color:#fff;font-weight:800}.secondary{width:100%;margin-top:8px;padding:12px;border:1px solid #293449;border-radius:14px;background:transparent;color:#aeb8ca}.ad{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(145%);width:min(92vw,500px);padding:16px;border:1px solid #414957;border-radius:22px;background:rgba(15,19,27,.98);box-shadow:0 20px 70px rgba(0,0,0,.5);transition:.25s;z-index:50}.ad.show{transform:translateX(-50%) translateY(0)}.ad small{color:#788295}.ad b{display:block;font-size:16px;margin:5px 0}.ad p{margin:0;color:#aab4c4;font-size:12px;line-height:1.45}@media(max-width:450px){h1{font-size:30px}.stations{grid-template-columns:1fr 1fr}.top{align-items:flex-start}.brand{font-size:21px}.pill{padding:8px 10px}}
+</style>
 </head>
 <body>
-  <div id="driverPanel" class="driver-panel">
-    <div class="driver-card">
-      <div class="brand"><span>СТУДИЯ</span> РАДИО</div>
-      <h2>Вход водителя</h2>
-      <p>Без паспорта и анкеты. Для демо нужен только внутренний номер или позывной.</p>
-      <input id="driverNameInput" maxlength="40" placeholder="Например: 777, ЛЕШИЙ, ЮРА">
-      <button id="driverSubmit">Войти в эфир</button>
-      <p style="margin-top:10px;font-size:11px">ID создаётся на этом устройстве и хранится локально.</p>
-    </div>
+<main class="app">
+  <div class="top">
+    <div><div class="brand"><span>СТУДИЯ</span> РАДИО</div><div class="eyebrow">free radio · driver media network</div></div>
+    <div class="nav"><button class="pill" id="driverBtn">Я водитель</button><button class="pill" onclick="location.href='driver.html'">Кабинет</button></div>
   </div>
-
-  <main class="app">
-    <div class="top">
-      <div>
-        <div class="brand"><span>СТУДИЯ</span> РАДИО</div>
-        <div class="eyebrow">driver media network - demo 2.0</div>
-      </div>
-      <button class="mini" id="cabinetBtn">Кабинет</button>
+  <section class="hero">
+    <div class="live"><span class="dot"></span><span id="statusText">Бесплатный эфир готов</span></div>
+    <h1>Включил.<br>И поехал.</h1>
+    <div class="sub">Восемь бесплатных музыкальных эфиров без регистрации. Для водителей есть отдельный режим с учётом валидных минут, балансом и партнёрскими бонусами.</div>
+    <div class="mode"><b id="modeTitle">Свободное прослушивание</b><span id="modeText">Без регистрации и начислений</span></div>
+    <div class="stations" id="stations"></div>
+    <div class="player">
+      <div class="row"><button class="play" id="playBtn">▶</button><div class="meta"><div class="name" id="stationName">Coffee Lo-Fi</div><div class="desc" id="stationDesc">мягкий дневной фон</div><div class="timer" id="adTimer">Рекламные вставки каждые 10–15 минут</div></div></div>
+      <div class="controls"><button class="control" id="muteBtn">Звук включён</button><button class="control" id="testAdBtn">Тест вставки</button></div>
+      <div class="driver-stats" id="driverStats"><div class="stat"><b id="sessionMinutes">0.0</b><span>минут сессии</span></div><div class="stat"><b id="balance">0.00 ₽</b><span>баланс</span></div><div class="stat"><b id="callsign">—</b><span>водитель</span></div></div>
     </div>
-
-    <section class="hero">
-      <div class="live"><span class="dot"></span><span id="statusText">Готов к эфиру</span></div>
-      <h1>Музыка в машине.<br>Реклама без баннера.</h1>
-      <div class="sub">Водитель включает канал, едет как обычно и получает начисление за валидное прослушивание. Реклама встраивается между музыкальными блоками и потом эфир продолжается.</div>
-
-      <div class="station-grid" id="stationGrid"></div>
-
-      <div class="player">
-        <div class="row">
-          <button class="play" id="playBtn" aria-label="Play">▶</button>
-          <div class="meta">
-            <div class="name" id="stationName">Coffee Lo-Fi</div>
-            <div class="desc" id="stationDesc">мягкий дневной фон</div>
-            <div class="timer" id="adTimer">Следующая реклама через 10-15 минут</div>
-          </div>
-        </div>
-        <div class="controls">
-          <button class="control" id="muteBtn">Звук включён</button>
-          <button class="control" id="testAdBtn">Тест рекламы</button>
-        </div>
-        <div class="stats">
-          <div class="stat"><b id="sessionMinutes">0.0</b><span>минут в сессии</span></div>
-          <div class="stat"><b id="sessionReward">0.00 ₽</b><span>тест начисления</span></div>
-          <div class="stat"><b id="driverLabel">-</b><span>водитель</span></div>
-        </div>
-      </div>
-
-      <div class="notice">Демо-звук генерируется прямо в браузере и не использует сторонние композиции. В боевой версии вместо него подключаются собственные мастер-файлы или поток с подтверждёнными коммерческими правами.</div>
-    </section>
-
-    <div class="section-title">Рекламный хаб</div>
-    <section class="hub" id="hub"></section>
-  </main>
-
-  <div id="adCard" class="ad">
-    <small>РЕКЛАМНАЯ ВСТАВКА</small>
-    <b id="adTitle">Гастробар на Ясной</b>
-    <p id="adText"></p>
-  </div>
-
+    <div class="notice">Демо-эфиры генерируются прямо в браузере и не используют сторонние композиции. Реальные мастер-файлы можно подключать по мере готовности, сохраняя подтверждение коммерческих прав.</div>
+  </section>
+  <div class="section-title">В эфире и в хабе</div><section class="hub" id="hub"></section>
+</main>
+<div class="overlay" id="driverOverlay"><div class="card"><div class="brand"><span>СТУДИЯ</span> РАДИО</div><h2>Режим водителя</h2><p>Нужен только позывной или внутренний номер. На этом устройстве создастся приватный токен для кабинета и начислений.</p><input id="callsignInput" maxlength="40" placeholder="Например: 777, ЛЕШИЙ, ЮРА"><button class="primary" id="registerDriver">Начать как водитель</button><button class="secondary" id="closeDriver">Отмена</button></div></div>
+<div class="ad" id="adCard"><small>СТУДИЯ РАДИО · РЕКЛАМНАЯ ВСТАВКА</small><b id="adTitle"></b><p id="adBody"></p></div>
 <script>
-const ANALYTICS_URL = "https://script.google.com/macros/s/AKfycbzvBIcBTri6xtG69SoNtUhudjg4ZbP1nsT5OoosFSxPL1i_stsC4d3dxULIaV7lUgZb/exec";
-const DRIVER_ID_KEY = "autocost_driver_id_v3";
-const DRIVER_NAME_KEY = "autocost_driver_name_v3";
-const RATE_RUB_PER_MINUTE = 0.03; // временная старая ставка, не бизнес-правило
-
-const STATIONS = [
-  {id:"coffee", name:"Coffee Lo-Fi", desc:"мягкий дневной фон", bpm:74, root:196, wave:"sine"},
-  {id:"calm", name:"Calm Lo-Fi", desc:"тихо, ровно, без вокала", bpm:66, root:174.61, wave:"triangle"},
-  {id:"jazz", name:"Midnight Jazz", desc:"джазовый лаунж для города", bpm:88, root:220, wave:"triangle"},
-  {id:"hiphop", name:"City Hip-Hop", desc:"спокойный бит без вокала", bpm:84, root:130.81, wave:"square"},
-  {id:"house", name:"Night House", desc:"ночной хаус и прайм-тайм", bpm:122, root:110, wave:"sawtooth"},
-  {id:"funk", name:"City Funk", desc:"живее, но без перегруза", bpm:102, root:146.83, wave:"triangle"},
-  {id:"ambient", name:"Ambient Drive", desc:"дальний путь и трасса", bpm:58, root:164.81, wave:"sine"},
-  {id:"synth", name:"Retro Synth", desc:"неон, город, поздний вечер", bpm:108, root:123.47, wave:"sawtooth"}
-];
-
-const ADS = [
-  {title:"Гастробар на Ясной", text:"Сергиев Посад. Ланчи, события, караоке и банкеты. Место, куда можно приехать не только поесть, но и остаться."},
-  {title:"Будем Знакомы", text:"Вечера для взрослых, где знакомятся без speed-dating и неловких анкет. Следи за новыми встречами в общем хабе."},
-  {title:"Кофе Вафли", text:"Кофе, вафли и завтраки весь день. Если нужен короткий пит-стоп с нормальным настроением - сохрани точку."},
-  {title:"Bambinium", text:"Проект для детей и родителей. Развитие, занятия и полезные активности без скучной подачи."},
-  {title:"Земли Pro", text:"Земельные участки и решения по недвижимости. Подбор под задачу, а не просто ещё одно объявление."},
-  {title:"СтройЭксперт Pro", text:"Строительная экспертиза, документы и техническая проверка. Когда лучше сначала разобраться, а потом платить."},
-  {title:"Евгения Travel", text:"Подбор путешествий и туров. Можно начать с идеи поездки, а дальше собрать маршрут под себя."}
-];
-
-let currentStation = STATIONS[0];
-let playing = false;
-let muted = false;
-let audioCtx = null;
-let master = null;
-let beatTimer = null;
-let beatIndex = 0;
-let sessionActiveSeconds = 0;
-let lastTick = Date.now();
-let nextAdAt = 0;
-let adRunning = false;
-let resumeAfterAd = false;
-
-function getDriver(){
-  return {id:localStorage.getItem(DRIVER_ID_KEY), name:localStorage.getItem(DRIVER_NAME_KEY)};
-}
-function createDriver(name){
-  const id = "drv_" + crypto.getRandomValues(new Uint32Array(1))[0].toString(36);
-  localStorage.setItem(DRIVER_ID_KEY,id);
-  localStorage.setItem(DRIVER_NAME_KEY,name);
-  return {id,name};
-}
-function sendEvent(event, extra={}){
-  const d = getDriver();
-  const payload = {
-    driver_id:d.id||"",
-    driver_name:d.name||"",
-    event,
-    mode:currentStation.id,
-    station:currentStation.name,
-    muted,
-    playing,
-    visibility:document.visibilityState,
-    user_agent:navigator.userAgent,
-    extra
-  };
-  fetch(ANALYTICS_URL,{method:"POST",mode:"no-cors",body:JSON.stringify(payload)}).catch(()=>{});
-}
-function renderStations(){
-  const grid = document.getElementById("stationGrid");
-  grid.innerHTML = "";
-  STATIONS.forEach(s=>{
-    const b=document.createElement("button");
-    b.className="station"+(s.id===currentStation.id?" active":"");
-    b.innerHTML=`<strong>${s.name}</strong><small>${s.desc}</small>`;
-    b.onclick=()=>switchStation(s.id);
-    grid.appendChild(b);
-  });
-}
-function renderHub(){
-  const hub=document.getElementById("hub");
-  hub.innerHTML=ADS.map(a=>`<div class="hub-item"><b>${a.title}</b><span>участник рекламной сети</span></div>`).join("");
-}
-function switchStation(id){
-  const s=STATIONS.find(x=>x.id===id); if(!s)return;
-  currentStation=s;
-  document.getElementById("stationName").textContent=s.name;
-  document.getElementById("stationDesc").textContent=s.desc;
-  renderStations();
-  if(playing){stopBeat();startBeat();}
-  sendEvent("station_switch",{station:id});
-}
-async function ensureAudio(){
-  if(!audioCtx){
-    audioCtx=new (window.AudioContext||window.webkitAudioContext)();
-    master=audioCtx.createGain();
-    master.gain.value=muted?0:0.18;
-    master.connect(audioCtx.destination);
-  }
-  if(audioCtx.state==="suspended")await audioCtx.resume();
-}
-function tone(freq,duration=0.18,volume=0.12,type=currentStation.wave,when=0){
-  const o=audioCtx.createOscillator();
-  const g=audioCtx.createGain();
-  o.type=type;o.frequency.value=freq;
-  const t=audioCtx.currentTime+when;
-  g.gain.setValueAtTime(0.0001,t);
-  g.gain.exponentialRampToValueAtTime(Math.max(0.001,volume),t+0.015);
-  g.gain.exponentialRampToValueAtTime(0.0001,t+duration);
-  o.connect(g);g.connect(master);o.start(t);o.stop(t+duration+0.03);
-}
-function kick(){
-  const o=audioCtx.createOscillator(),g=audioCtx.createGain(),t=audioCtx.currentTime;
-  o.type="sine";o.frequency.setValueAtTime(120,t);o.frequency.exponentialRampToValueAtTime(45,t+0.12);
-  g.gain.setValueAtTime(0.12,t);g.gain.exponentialRampToValueAtTime(0.0001,t+0.15);
-  o.connect(g);g.connect(master);o.start(t);o.stop(t+0.16);
-}
-function playBeat(){
-  if(!playing||adRunning||!audioCtx)return;
-  const scale=[1,1.125,1.25,1.5,1.667,2];
-  const step=beatIndex%8;
-  const f=currentStation.root*scale[[0,2,3,1,4,3,2,5][step]];
-  tone(f,0.19,0.08,currentStation.wave);
-  if(step%2===0)tone(currentStation.root/2,0.28,0.055,"sine");
-  if(currentStation.id==="house"||currentStation.id==="hiphop"||currentStation.id==="funk"){
-    if(step%2===0)kick();
-  }
-  if(currentStation.id==="ambient"||currentStation.id==="calm"||currentStation.id==="jazz"){
-    tone(currentStation.root*1.5,0.55,0.025,"sine",0.03);
-  }
-  beatIndex++;
-}
-function startBeat(){
-  stopBeat();
-  beatIndex=0;
-  const interval=Math.max(220,60000/currentStation.bpm/2);
-  playBeat();
-  beatTimer=setInterval(playBeat,interval);
-}
-function stopBeat(){if(beatTimer){clearInterval(beatTimer);beatTimer=null;}}
-async function togglePlay(){
-  if(adRunning)return;
-  if(!playing){
-    await ensureAudio();
-    playing=true;startBeat();scheduleAdIfNeeded();
-    document.getElementById("playBtn").textContent="Ⅱ";
-    document.getElementById("statusText").textContent="Эфир идёт";
-    sendEvent("play_start",{});
-  }else{
-    playing=false;stopBeat();
-    document.getElementById("playBtn").textContent="▶";
-    document.getElementById("statusText").textContent="Пауза";
-    sendEvent("pause",{});
-  }
-}
-function toggleMute(){
-  muted=!muted;
-  if(master)master.gain.setTargetAtTime(muted?0:0.18,audioCtx.currentTime,0.03);
-  const btn=document.getElementById("muteBtn");
-  btn.textContent=muted?"Звук выключен":"Звук включён";
-  btn.classList.toggle("on",muted);
-  sendEvent(muted?"mute_on":"mute_off",{});
-}
-function scheduleAdIfNeeded(){
-  if(!nextAdAt)nextAdAt=Date.now()+(10+Math.random()*5)*60*1000;
-}
-function updateAdTimer(){
-  const el=document.getElementById("adTimer");
-  if(!nextAdAt){el.textContent="Следующая реклама через 10-15 минут";return;}
-  const left=Math.max(0,Math.ceil((nextAdAt-Date.now())/1000));
-  const m=Math.floor(left/60),s=String(left%60).padStart(2,"0");
-  el.textContent=`Следующая реклама через ${m}:${s}`;
-  if(left<=0&&playing&&!adRunning)runAd();
-}
-async function runAd(force=false){
-  if(adRunning)return;
-  adRunning=true;resumeAfterAd=playing;
-  stopBeat();
-  const ad=ADS[Math.floor(Math.random()*ADS.length)];
-  document.getElementById("adTitle").textContent=ad.title;
-  document.getElementById("adText").textContent=ad.text;
-  document.getElementById("adCard").classList.add("show");
-  document.getElementById("statusText").textContent="Рекламная вставка";
-  sendEvent("ad_start",{advertiser:ad.title,forced:force});
-  const finish=()=>{
-    document.getElementById("adCard").classList.remove("show");
-    adRunning=false;
-    nextAdAt=Date.now()+(10+Math.random()*5)*60*1000;
-    if(resumeAfterAd&&playing){startBeat();document.getElementById("statusText").textContent="Эфир идёт";}
-    sendEvent("ad_end",{advertiser:ad.title});
-  };
-  if("speechSynthesis" in window){
-    speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(ad.title+". "+ad.text);
-    u.lang="ru-RU";u.rate=0.96;u.pitch=0.95;
-    u.onend=finish;u.onerror=()=>setTimeout(finish,7000);
-    speechSynthesis.speak(u);
-  }else setTimeout(finish,8000);
-}
-function updateStats(){
-  const now=Date.now(),delta=Math.min(3,(now-lastTick)/1000);lastTick=now;
-  if(playing&&!muted&&!adRunning)sessionActiveSeconds+=delta;
-  const mins=sessionActiveSeconds/60;
-  document.getElementById("sessionMinutes").textContent=mins.toFixed(1);
-  document.getElementById("sessionReward").textContent=(mins*RATE_RUB_PER_MINUTE).toFixed(2)+" ₽";
-}
-document.getElementById("playBtn").onclick=togglePlay;
-document.getElementById("muteBtn").onclick=toggleMute;
-document.getElementById("testAdBtn").onclick=()=>runAd(true);
-document.getElementById("cabinetBtn").onclick=()=>location.href="driver.html";
-document.getElementById("driverSubmit").onclick=()=>{
-  const name=document.getElementById("driverNameInput").value.trim();if(!name)return;
-  const d=createDriver(name);
-  document.getElementById("driverPanel").style.display="none";
-  document.getElementById("driverLabel").textContent=d.name;
-  sendEvent("register",{version:"2.0"});
-};
-document.addEventListener("visibilitychange",()=>sendEvent("visibility_change",{state:document.visibilityState}));
-window.addEventListener("beforeunload",()=>sendEvent("session_end",{active_seconds:Math.round(sessionActiveSeconds)}));
-setInterval(()=>{if(playing){const x={active_seconds:Math.round(sessionActiveSeconds),audio_state:audioCtx?audioCtx.state:"none"};sendEvent("heartbeat",x);sendEvent("tick",x);}},60000);
-setInterval(()=>{updateStats();updateAdTimer();},1000);
-
-if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js").catch(()=>{}));
-renderStations();renderHub();
-const d=getDriver();
-if(d.id&&d.name){
-  document.getElementById("driverPanel").style.display="none";
-  document.getElementById("driverLabel").textContent=d.name;
-}else{
-  document.getElementById("driverLabel").textContent="новый";
-}
+const SUPA='https://ieqnyjccyxzjwsexkgjv.supabase.co';
+const ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImllcW55amNjeXh6andzZXhrZ2p2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYxMjMyOTAsImV4cCI6MjEwMTY5OTI5MH0.bPgS38kaGTYC3NHCS_ST0sCkQZuOLkn0Jw0Hmyd61kE';
+const D_TOKEN='studia_radio_driver_token';const D_ID='studia_radio_driver_id';const D_NAME='studia_radio_driver_name';
+const FALLBACK=[{id:'coffee',name:'Coffee Lo-Fi',description:'мягкий дневной фон',bpm:74,root:196,wave:'sine'},{id:'calm',name:'Calm Lo-Fi',description:'тихо, ровно, без вокала',bpm:66,root:174.61,wave:'triangle'},{id:'jazz',name:'Midnight Jazz',description:'джазовый лаунж для города',bpm:88,root:220,wave:'triangle'},{id:'hiphop',name:'City Hip-Hop',description:'спокойный бит без вокала',bpm:84,root:130.81,wave:'square'},{id:'house',name:'Night House',description:'ночной хаус и прайм-тайм',bpm:122,root:110,wave:'sawtooth'},{id:'funk',name:'City Funk',description:'живее, но без перегруза',bpm:102,root:146.83,wave:'triangle'},{id:'ambient',name:'Ambient Drive',description:'дальний путь и трасса',bpm:58,root:164.81,wave:'sine'},{id:'synth',name:'Retro Synth',description:'неон, город, поздний вечер',bpm:108,root:123.47,wave:'sawtooth'}];
+let channels=FALLBACK,ads=[],current=channels[0],playing=false,muted=false,audioCtx=null,master=null,beatTimer=null,step=0,nextAdAt=0,adRunning=false,resumeAfterAd=false,sessionSeconds=0,lastSecond=Date.now(),lastHeartbeatActive=0;
+function driver(){return{id:localStorage.getItem(D_ID),token:localStorage.getItem(D_TOKEN),name:localStorage.getItem(D_NAME)}}
+function headers(extra={}){return{'apikey':ANON,'Authorization':'Bearer '+ANON,'Content-Type':'application/json',...extra}}
+async function api(path,opt={}){const r=await fetch(SUPA+'/rest/v1/'+path,{method:opt.method||'GET',headers:headers(opt.headers||{}),body:opt.body?JSON.stringify(opt.body):undefined});if(!r.ok)throw new Error(await r.text());const t=await r.text();return t?JSON.parse(t):null}
+async function sha256(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function loadData(){try{channels=await api('radio_channels?select=*&enabled=eq.true&order=sort_order.asc')||FALLBACK;if(!channels.length)channels=FALLBACK;ads=await api('radio_ads?select=*&active=eq.true');}catch(e){channels=FALLBACK;ads=[]}current=channels[0];renderStations();renderHub();syncMeta()}
+function renderStations(){const el=document.getElementById('stations');el.innerHTML='';channels.forEach(c=>{const b=document.createElement('button');b.className='station'+(c.id===current.id?' active':'');b.innerHTML='<strong>'+c.name+'</strong><small>'+c.description+'</small>';b.onclick=()=>switchChannel(c.id);el.appendChild(b)})}
+function renderHub(){const base=ads.length?ads:[{title:'Гастробар на Ясной'},{title:'Будем Знакомы'},{title:'Кофе Вафли'},{title:'Bambinium'},{title:'Земли Pro'},{title:'СтройЭксперт Pro'},{title:'Евгения Travel'}];document.getElementById('hub').innerHTML=base.map(x=>'<div class="hub-item"><b>'+x.title+'</b><span>участник сети</span></div>').join('')}
+function syncMeta(){document.getElementById('stationName').textContent=current.name;document.getElementById('stationDesc').textContent=current.description}
+function switchChannel(id){const c=channels.find(x=>x.id===id);if(!c)return;current=c;syncMeta();renderStations();if(playing){stopBeat();startBeat()}logEvent('station_switch',{station:id})}
+async function ensureAudio(){if(!audioCtx){audioCtx=new(window.AudioContext||window.webkitAudioContext)();master=audioCtx.createGain();master.gain.value=muted?0:.18;master.connect(audioCtx.destination)}if(audioCtx.state==='suspended')await audioCtx.resume()}
+function tone(freq,dur=.18,vol=.08,type=current.wave,when=0){const o=audioCtx.createOscillator(),g=audioCtx.createGain(),t=audioCtx.currentTime+when;o.type=type||'sine';o.frequency.value=Number(freq);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.001,vol),t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+.03)}
+function kick(){const o=audioCtx.createOscillator(),g=audioCtx.createGain(),t=audioCtx.currentTime;o.frequency.setValueAtTime(120,t);o.frequency.exponentialRampToValueAtTime(45,t+.12);g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.0001,t+.15);o.connect(g);g.connect(master);o.start(t);o.stop(t+.16)}
+function beat(){if(!playing||adRunning||!audioCtx)return;const scale=[1,1.125,1.25,1.5,1.667,2],seq=[0,2,3,1,4,3,2,5],f=Number(current.root)*scale[seq[step%8]];tone(f,.19,.075,current.wave);if(step%2===0)tone(Number(current.root)/2,.28,.05,'sine');if(['house','hiphop','funk'].includes(current.id)&&step%2===0)kick();if(['ambient','calm','jazz'].includes(current.id))tone(Number(current.root)*1.5,.52,.022,'sine',.03);step++}
+function startBeat(){stopBeat();step=0;beat();beatTimer=setInterval(beat,Math.max(220,60000/Number(current.bpm||80)/2))}function stopBeat(){if(beatTimer){clearInterval(beatTimer);beatTimer=null}}
+async function togglePlay(){if(adRunning)return;if(!playing){await ensureAudio();playing=true;startBeat();scheduleAd();document.getElementById('playBtn').textContent='Ⅱ';document.getElementById('statusText').textContent=driver().id?'Эфир идёт · минуты считаются':'Бесплатный эфир идёт';logEvent('play_start',{})}else{playing=false;stopBeat();document.getElementById('playBtn').textContent='▶';document.getElementById('statusText').textContent='Пауза';logEvent('pause',{})}}
+function toggleMute(){muted=!muted;if(master&&audioCtx)master.gain.setTargetAtTime(muted?0:.18,audioCtx.currentTime,.03);const b=document.getElementById('muteBtn');b.textContent=muted?'Звук выключен':'Звук включён';b.classList.toggle('on',muted);logEvent(muted?'mute_on':'mute_off',{})}
+function scheduleAd(){if(!nextAdAt)nextAdAt=Date.now()+(10+Math.random()*5)*60000}
+function adTimer(){const el=document.getElementById('adTimer');if(!nextAdAt){el.textContent='Рекламные вставки каждые 10–15 минут';return}const left=Math.max(0,Math.ceil((nextAdAt-Date.now())/1000));el.textContent='Следующая вставка через '+Math.floor(left/60)+':'+String(left%60).padStart(2,'0');if(left<=0&&playing&&!adRunning)runAd(false)}
+function chooseAd(){if(ads.length)return ads[Math.floor(Math.random()*ads.length)];return{title:'СТУДИЯ РАДИО',body:'Бесплатная музыка в дороге. Для водителей — минуты, баланс и партнёрские бонусы.'}}
+function runAd(force){if(adRunning)return;adRunning=true;resumeAfterAd=playing;stopBeat();const a=chooseAd();document.getElementById('adTitle').textContent=a.title;document.getElementById('adBody').textContent=a.body||'';document.getElementById('adCard').classList.add('show');document.getElementById('statusText').textContent='Рекламная вставка';logEvent('ad_start',{advertiser:a.title,forced:!!force});const finish=()=>{document.getElementById('adCard').classList.remove('show');adRunning=false;nextAdAt=Date.now()+(10+Math.random()*5)*60000;if(resumeAfterAd&&playing){startBeat();document.getElementById('statusText').textContent=driver().id?'Эфир идёт · минуты считаются':'Бесплатный эфир идёт'}logEvent('ad_end',{advertiser:a.title})};if('speechSynthesis'in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(a.title+'. '+(a.body||''));u.lang='ru-RU';u.rate=.96;u.onend=finish;u.onerror=()=>setTimeout(finish,6500);speechSynthesis.speak(u)}else setTimeout(finish,7000)}
+async function registerDriver(){const name=document.getElementById('callsignInput').value.trim();if(!name)return;const token='sr_'+crypto.randomUUID()+'_'+crypto.randomUUID();const tokenHash=await sha256(token);try{const rows=await api('radio_drivers?select=id,callsign,total_valid_seconds,balance_rub',{method:'POST',headers:{'x-driver-token':token,'Prefer':'return=representation'},body:{callsign:name,token_hash:tokenHash}});const d=rows&&rows[0];if(!d)throw new Error('no driver');localStorage.setItem(D_TOKEN,token);localStorage.setItem(D_ID,d.id);localStorage.setItem(D_NAME,d.callsign);document.getElementById('driverOverlay').classList.remove('show');applyDriverMode();logEvent('register',{})}catch(e){alert('Не удалось создать кабинет. Попробуй ещё раз.')}}
+async function refreshDriver(){const d=driver();if(!d.id||!d.token)return;try{const rows=await api('radio_drivers?select=id,callsign,total_valid_seconds,balance_rub&id=eq.'+encodeURIComponent(d.id),{headers:{'x-driver-token':d.token}});if(rows&&rows[0]){document.getElementById('balance').textContent=Number(rows[0].balance_rub||0).toFixed(2)+' ₽'}}catch(e){}}
+function applyDriverMode(){const d=driver();if(d.id&&d.token){document.getElementById('modeTitle').textContent='Режим водителя';document.getElementById('modeText').textContent='Валидные минуты отправляются в кабинет';document.getElementById('driverStats').style.display='grid';document.getElementById('callsign').textContent=d.name||'водитель';document.getElementById('driverBtn').textContent='Водитель: '+(d.name||'ON');refreshDriver()}else{document.getElementById('driverStats').style.display='none'}}
+async function logEvent(event,meta){const d=driver();const body={driver_id:d.id||null,event,channel_id:current?current.id:null,muted,meta:meta||{}};try{await api('radio_events',{method:'POST',headers:{'x-driver-token':d.token||'','Prefer':'return=minimal'},body})}catch(e){}}
+async function heartbeat(){const d=driver();if(!d.id||!d.token||!playing)return;const active=Math.floor(sessionSeconds);const delta=Math.max(0,Math.min(60,active-lastHeartbeatActive));lastHeartbeatActive=active;try{await api('radio_events',{method:'POST',headers:{'x-driver-token':d.token,'Prefer':'return=minimal'},body:{driver_id:d.id,event:'heartbeat',channel_id:current.id,muted,meta:{delta_active_seconds:muted||adRunning?0:delta}}});await refreshDriver()}catch(e){}}
+function tick(){const now=Date.now(),delta=Math.min(2,(now-lastSecond)/1000);lastSecond=now;if(playing&&!muted&&!adRunning)sessionSeconds+=delta;document.getElementById('sessionMinutes').textContent=(sessionSeconds/60).toFixed(1);adTimer()}
+document.getElementById('playBtn').onclick=togglePlay;document.getElementById('muteBtn').onclick=toggleMute;document.getElementById('testAdBtn').onclick=()=>runAd(true);document.getElementById('driverBtn').onclick=()=>{const d=driver();if(d.id)location.href='driver.html';else document.getElementById('driverOverlay').classList.add('show')};document.getElementById('closeDriver').onclick=()=>document.getElementById('driverOverlay').classList.remove('show');document.getElementById('registerDriver').onclick=registerDriver;setInterval(tick,1000);setInterval(heartbeat,60000);document.addEventListener('visibilitychange',()=>logEvent('visibility_change',{state:document.visibilityState}));if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('service-worker.js').catch(()=>{}));loadData().then(applyDriverMode);
 </script>
 </body>
 </html>
